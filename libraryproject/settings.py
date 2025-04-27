@@ -29,6 +29,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['libraryapp-caitlinvickery.fly.dev', '127.0.0.1', 'localhost']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://libraryapp-caitlinvickery.fly.dev'
+]
+
 
 # Application definition
 
