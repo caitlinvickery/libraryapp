@@ -120,6 +120,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Where to collect static files when running collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Extra places to find static files (your app's /static/ folders)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'libraryapp', 'static'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
