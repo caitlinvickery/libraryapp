@@ -1,0 +1,21 @@
+{% extends "libraryapp/base.html" %}
+{% block content %}
+
+<div id="profile-section">
+  <h2>{{ profile_user.username }}'s Profile</h2>
+
+  <div class="profile-info">
+    <p><strong>First Name:</strong> {{ profile_user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ profile_user.last_name }}</p>
+    <p><strong>Email:</strong> {{ profile_user.email }}</p>
+    <p><strong>Favorite Genre:</strong> {{ profile_user.profile.favorite_genre }}</p>
+  </div>
+
+  {% if request.user.is_authenticated and request.user == profile_user or request.user.profile.role == 'admin' %}
+    <a href="{% url 'edit_profile' profile_user.username %}" class="btn">Edit Profile</a>
+  {% endif %}
+
+  {% include "libraryapp/activity_feed.html" %}
+</div>
+
+{% endblock %}

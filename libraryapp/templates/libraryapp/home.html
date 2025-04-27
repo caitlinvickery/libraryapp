@@ -1,0 +1,76 @@
+{% extends "libraryapp/base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <!-- Logged-in Dashboard View -->
+        <section id="welcome">
+            <h2>Welcome back, {{ request.user.username }}!</h2>
+            <p>Start exploring!</p>
+            <div class="search-container">
+                <form action="{% url 'list' %}" method="GET" class="search-form">
+                    <input type="text" name="query" id="search-books" placeholder="Search the catalog..." required>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+            
+            {% include "libraryapp/activity_feed.html" %}
+        </section>
+
+        <!-- Recommended for You Section -->
+        <section class="content-sections">
+            <div id="recommended-books" class="recommended-books">
+                <h3>Recommended for You</h3>
+                <ul>
+                    {% for book in recommended_books %}
+                    <li>
+                        <img src="{% static 'libraryapp/' %}{{ book.image }}" alt="{{ book.title }}">
+                        {{ book.title }} – {{ book.description }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Featured Books Section -->
+            <div id="featured-books" class="featured-books">
+                <h3>Featured Books</h3>
+                <ul>
+                    {% for book in featured_books %}
+                    <li>
+                        <img src="{% static 'libraryapp/' %}{{ book.image }}" alt="{{ book.title }}">
+                        {{ book.title }} – {{ book.description }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+    {% else %}
+        <!-- Guest View -->
+        <section id="welcome">
+            <h2>Welcome to the Community Library Exchange!</h2>
+            <p>Discover, borrow, and share books with your neighbors. Join now and start exploring!</p>
+            <div class="search-container">
+                <form action="{% url 'list' %}" method="GET" class="search-form">
+                    <input type="text" name="query" id="search-books" placeholder="Search for books..." required>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Featured Books Section -->
+        <section class="content-sections">
+            <div class="featured-books">
+                <h3>Featured Books</h3>
+                <ul>
+                    {% for book in featured_books %}
+                    <li>
+                        <img src="{% static 'libraryapp/' %}{{ book.image }}" alt="{{ book.title }}">
+                        {{ book.title }} – {{ book.description }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    {% endif %}
+{% endblock %}

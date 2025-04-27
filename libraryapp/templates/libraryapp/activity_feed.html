@@ -1,0 +1,10 @@
+<div class="activity-feed">
+  <h3>Recent Activity</h3>
+    {% for activity in activities %}
+      <div class="activity-item">
+          <a href="{% url 'view_profile' activity.user.username %}">{{ activity.user.username }}</a> {{ activity.description|safe }} - <small>{{ activity.timestamp|timesince }} ago</small>
+      </div>
+    {% empty %}
+        <p>No recent activity yet.</p>
+    {% endfor %}
+</div>

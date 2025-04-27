@@ -1,0 +1,15 @@
+{% extends "libraryapp/base.html" %}
+
+{% block content %}
+<main>
+  <section id="register-section">
+    <h2>Register</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </section>
+</main>
+
+{% endblock %}

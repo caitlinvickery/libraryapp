@@ -1,0 +1,56 @@
+{% extends "libraryapp/base.html" %} {% load static %} {% block content %}
+<main>
+  <section id="catalog">
+    <h2>Book Catalog</h2>
+
+    <!-- Search Bar -->
+    <form method="get" class="search-form">
+      <input
+        type="text"
+        id="search"
+        name="query"
+        placeholder="Search for books by title..."
+        value="{{ request.GET.query }}"
+      />
+      <button type="submit" class="btn">Search</button>
+    </form>
+    <!-- Sort Buttons -->
+    <form method="get" class="sort-form" style="margin-top: 10px;">
+      <input type="hidden" name="query" value="{{ request.GET.query }}">
+      <button type="submit" name="sort" value="title" class="btn">Sort by Title</button>
+      <button type="submit" name="sort" value="author" class="btn">Sort by Author</button>
+    </form>
+    <!-- Dynamic Book List -->
+    <div class="book-list">
+      {% if books %} {% for book in books %}
+      <div class="book-item" data-book-id="{{ book.id }}">
+        <img
+          src="{% static 'libraryapp/' %}{{ book.image }}"
+          alt="{{ book.title }}"
+        />
+        <h3>{{ book.title }}</h3>
+        <p>By {{ book.author }}</p>
+        <div class="stars">
+          {% for i in "12345"|slice:":5" %}
+            {% if forloop.counter <= book.rating %}
+              ★
+            {% else %}
+              ☆
+            {% endif %}
+          {% endfor %}
+        </div>
+        <!-- Check Availability (Ajax Trigger) -->
+        <p class="availability-result" style="font-style: italic;"></p>
+      </div>
+      {% endfor %} {% else %}
+      <!-- If no books found for keyword search -->
+      <p class="error-message">
+        ❌ No books match your search. Try another title.
+      </p>
+      {% endif %}
+    </div>
+  </section>
+</main>
+
+<script src="{% static 'libraryapp/list.js' %}"></script>
+{% endblock %}

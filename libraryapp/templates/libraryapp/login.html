@@ -1,0 +1,30 @@
+{% extends "libraryapp/base.html" %} {% load static %} {% block content %}
+<section class="login-section">
+  <!-- Login Screen -->
+  <h2>Login to Your Account</h2>
+
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="error-message">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <!-- Username Field -->
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" name="username" id="username" required />
+    </div>
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" required />
+    </div>
+    <!-- Submit -->
+    <button type="submit" class="btn">Login</button>
+  </form>
+</section>
+{% endblock %}

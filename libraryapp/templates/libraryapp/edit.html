@@ -1,0 +1,55 @@
+{% extends "libraryapp/base.html" %} {% load static %} {% block content %}
+<section id="edit-book">
+  <h2>Edit Book</h2>
+
+  <form method="post" action="" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- Edit Form -->
+    <div class="form-grid">
+      <!-- Book Title -->
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value="{{ book.title }}"
+          required
+        />
+      </div>
+      <!-- Book Author -->
+      <div class="form-group">
+        <label for="author">Author:</label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          value="{{ book.author }}"
+          required
+        />
+      </div>
+      <!-- Book Genre -->
+      <div class="form-group">
+        <label for="genre">Genre:</label>
+        <input
+          type="text"
+          id="genre"
+          name="genre"
+          value="{{ book.genre }}"
+          required
+        />
+      </div>
+      <!-- Book Description -->
+      <div class="form-group full-width">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="5" required>{{ book.description }}</textarea>
+      </div>
+    </div>
+
+    <!-- Save Changes -->
+    <div class="edit-delete-actions">
+      <button type="submit" class="btn">Save Changes</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
