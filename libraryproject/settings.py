@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)7rfe%g1mm0%14qip*rr$k*_(s!*(89o)4@mo0usd8th1-iav%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['libraryapp-caitlinvickery.fly.dev', '127.0.0.1', 'localhost']
 
 
 # Application definition
